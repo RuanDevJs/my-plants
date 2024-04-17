@@ -5,7 +5,12 @@ import * as Styled from "./styles";
 import { useTheme } from "styled-components/native";
 import { SvgUri } from "react-native-svg";
 
-type TypeEnvironmentsKeys = "living_room" | "bedroom" | "kitchen" | "bathroom";
+type TypeEnvironmentsKeys =
+  | "all"
+  | "living_room"
+  | "bedroom"
+  | "kitchen"
+  | "bathroom";
 
 interface Props {
   data: {

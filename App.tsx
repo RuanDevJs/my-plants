@@ -7,8 +7,10 @@ import {
   useFonts,
 } from "@expo-google-fonts/nunito";
 
-import Header from "./src/components/Header";
-import Home from "./src/screens/Home";
+import { NavigationContainer } from "@react-navigation/native";
+import TabsNavigator from "./src/routes/tabs.routes";
+
+import { PlantsProvider } from "./src/context/PlantsContext";
 
 import theme from "./src/theme";
 import { ThemeProvider } from "styled-components/native";
@@ -27,10 +29,14 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <View style={styles.container}>
-        <Header />
-        <Home />
-      </View>
+      <PlantsProvider>
+        <NavigationContainer>
+          <View style={styles.container}>
+            {/* <Header /> */}
+            <TabsNavigator />
+          </View>
+        </NavigationContainer>
+      </PlantsProvider>
     </ThemeProvider>
   );
 }
