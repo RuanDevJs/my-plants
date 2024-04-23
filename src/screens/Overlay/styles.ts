@@ -4,6 +4,7 @@ import Animated from "react-native-reanimated";
 
 export const Background = styled.View`
   flex: 1;
+  width: 100%;
 
   justify-content: center;
   align-items: center;
@@ -20,9 +21,10 @@ export const Container = styled.View`
 `;
 
 export const Poster = styled(Animated.Image)`
+  flex: 1;
+
   width: 100%;
-  align-items: center;
-  justify-content: center;
+  height: 100%;
 `;
 
 export const Picture = styled(Animated.View)``;

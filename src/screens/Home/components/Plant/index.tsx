@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native";
 import * as Styled from "./styles";
 import { useTheme } from "styled-components/native";
 import { SvgUri } from "react-native-svg";
+import { useNavigation } from "@react-navigation/native";
 
 type TypeEnvironmentsKeys =
   | "all"
@@ -29,9 +30,15 @@ interface Props {
 export default function Plant({ data }: Props) {
   const theme = useTheme();
 
+  const navigate = useNavigation();
+
+  function handleNavigate() {
+    navigate.navigate("Plant", data);
+  }
+
   return (
     <Styled.Background>
-      <Styled.Container activeOpacity={0.42}>
+      <Styled.Container activeOpacity={0.42} onPress={handleNavigate}>
         <Styled.Picture>
           <SvgUri uri={data.photo} width={180} height={100} />
         </Styled.Picture>

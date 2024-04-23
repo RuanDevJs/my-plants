@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { IPlants, usePlants } from "../../context/PlantsContext";
 
 import { SvgUri } from "react-native-svg";
@@ -13,8 +13,12 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 
+import Wallpaper1 from "../../assets/Wallpaper-1.jpg";
+import Wallpaper2 from "../../assets/Wallpaper-2.jpg";
+import Wallpaper3 from "../../assets/Wallpaper-3.jpg";
+import Wallpaper4 from "../../assets/Wallpaper-4.jpg";
+
 import * as Styled from "./styles";
-import { useState } from "react";
 
 export default function Overlay() {
   const { plants } = usePlants();
@@ -26,13 +30,6 @@ export default function Overlay() {
 
   return (
     <Styled.Background>
-      <Styled.Poster
-        source={{
-          uri: "https://img.freepik.com/fotos-gratis/fundo-de-folhas-verdes-tropicais_53876-88891.jpg?w=740&t=st=1713364414~exp=1713365014~hmac=80ace59f30958a63c12fc24a2fcdd8d1fb9b46b7e35fe0aee9564f001c787ab2",
-        }}
-        style={StyleSheet.absoluteFillObject}
-        blurRadius={5}
-      />
       <Animated.FlatList
         data={plants}
         keyExtractor={(item) => `$plant=${item.id}`}
@@ -82,8 +79,55 @@ function Plant({ data, index, translationX }: IPlantProps) {
     };
   });
 
+  const rStyledOpacity = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        translationX.value,
+        [
+          (index - 1) * Device.width,
+          index * Device.width,
+          (index + 1) * Device.width,
+        ],
+        [0, 1, 0]
+      ),
+      transform: [
+        {
+          translateX: interpolate(
+            translationX.value,
+            [
+              (index - 1) * Device.width,
+              index * Device.width,
+              (index + 1) * Device.width,
+            ],
+            [-Device.width, 0, 0]
+          ),
+        },
+      ],
+    };
+  });
+
+  const wallpapers = [
+    Wallpaper1,
+    Wallpaper2,
+    Wallpaper3,
+    Wallpaper4,
+    Wallpaper3,
+    Wallpaper1,
+    Wallpaper2,
+    Wallpaper3,
+    Wallpaper4,
+    Wallpaper1,
+  ];
+
   return (
     <Styled.Container>
+      <Styled.Poster
+        source={wallpapers[index]}
+        style={[StyleSheet.absoluteFillObject, rStyledOpacity]}
+        blurRadius={8}
+        resizeMode={"cover"}
+        resizeMethod={"resize"}
+      />
       <Styled.Picture style={rStyledPicture}>
         <SvgUri
           uri={data.photo}

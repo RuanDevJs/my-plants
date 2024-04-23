@@ -8,9 +8,5 @@ interface IProps {
 }
 
 export default function Icon({ name, color }: IProps) {
-  return (
-    <Styled.Container>
-      <Feather name={name} size={24} color={color} />
-    </Styled.Container>
-  );
+  return <Feather name={name} size={24} color={color} />;
 }

@@ -8,6 +8,7 @@ import Overlay from "../screens/Overlay";
 import Header from "../components/Header";
 import Icon from "../components/Icon";
 import { View } from "react-native";
+import Plant from "../screens/Plant";
 
 export default function TabsNavigator() {
   const { Navigator, Screen } = createBottomTabNavigator();
@@ -49,9 +50,21 @@ export default function TabsNavigator() {
             backgroundColor: "rgba(0, 0, 0, 0)",
             position: "absolute",
             borderTopWidth: 0,
+            bottom: 0,
             paddingBottom: 8,
             height: 60,
+            opacity: 0.72,
           },
+        }}
+      />
+      <Screen
+        name="Plant"
+        component={Plant}
+        options={{
+          tabBarItemStyle: {
+            display: "none",
+          },
+          unmountOnBlur: true,
         }}
       />
     </Navigator>
